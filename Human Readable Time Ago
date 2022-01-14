@@ -1,0 +1,25 @@
+<?php
+	function human_time_diff($time) {
+		$now = new \DateTime();
+		$interval = $now->diff(new \DateTime($time));
+		if ($interval->invert == 0) return 'just now';
+		if ($interval->y == 1) return $interval->format('a year ago');
+		if ($interval->y > 1) return $interval->format('%y years ago');
+		if ($interval->m == 1) return $interval->format('a month ago');
+		if ($interval->m > 1) return $interval->format('%m months ago');
+		if ($interval->d == 1) return $interval->format('yesterday');
+		if ($interval->d > 1) return $interval->format('%d days ago');
+		if ($interval->h == 1) return $interval->format('an hour ago');
+		if ($interval->h > 1) return $interval->format('%h hours ago');
+		if ($interval->i == 1) return $interval->format('a minute ago');
+		if ($interval->i > 1) return $interval->format('%i minutes ago');
+		return $interval->format('just now');
+	}
+	echo human_time_diff('2000-01-01') . PHP_EOL;
+	echo human_time_diff(date("Y-m-d H:i:s")) . PHP_EOL;
+	echo human_time_diff(date("Y-m-d H:i:s", time() - 60)) . PHP_EOL;
+	echo human_time_diff(date("Y-m-d H:i:s", time() - 120)) . PHP_EOL;
+	echo human_time_diff(date("Y-m-d H:i:s", time() - 60 * 60)) . PHP_EOL;
+	echo human_time_diff(date("Y-m-d H:i:s", time() - 60 * 60 * 24)) . PHP_EOL;
+	echo human_time_diff(date("Y-m-d H:i:s", time() - 60 * 60 * 24 * 2)) . PHP_EOL;
+?>
